@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 
 from desktopmagic.screengrab_win32 import getVirtualScreenRect
 

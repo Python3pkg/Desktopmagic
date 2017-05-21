@@ -2,7 +2,7 @@
 Robust functions for grabbing and saving screenshots on Windows.
 """
 
-from __future__ import print_function
+
 
 import ctypes
 import win32gui
@@ -11,7 +11,7 @@ import win32con
 import win32api
 
 try:
-	long
+	int
 except NameError:
 	# Python 3
 	long = int
@@ -28,7 +28,7 @@ def checkRect(rect):
 		left, top, right, bottom = rect
 	except ValueError:
 		raise ValueError("%r is not a valid rect; must contain 4 ints" % (rect,))
-	if not all(isinstance(x, (int, long)) for x in rect):
+	if not all(isinstance(x, int) for x in rect):
 		raise ValueError("%r is not a valid rect; must contain 4 ints" % (rect,))
 	width = right - left
 	height = bottom - top
@@ -118,7 +118,7 @@ def getDisplayRects():
 	Raises L{RectFailed} if the geometry cannot be retrieved, though
 	this failure mode has never been observed.
 	"""
-	HANDLE_MONITOR, HDC_MONITOR, SCREEN_RECT = range(3)
+	HANDLE_MONITOR, HDC_MONITOR, SCREEN_RECT = list(range(3))
 
 	# My experiments show this needs to be no more than 3 (for 4 iterations
 	# through the loop), but use 150 in case there are pathological systems.
@@ -218,7 +218,7 @@ def getDCAndBitMap(saveBmpFilename=None, rect=None):
 	# Retrieve the device context (DC) for the entire virtual screen.
 	hwndDevice = win32gui.GetWindowDC(hwndDesktop)
 	##print("device", hwndDevice)
-	assert isinstance(hwndDevice, (int, long)), hwndDevice
+	assert isinstance(hwndDevice, int), hwndDevice
 
 	mfcDC  = win32ui.CreateDCFromHandle(hwndDevice)
 	try:

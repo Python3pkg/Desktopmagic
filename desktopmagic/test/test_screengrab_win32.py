@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 
 import os
 try:
@@ -47,7 +47,7 @@ class GetDisplayRectsTest(unittest.TestCase):
 		Disabled because Ivan manually confirmed that it does not leak.
 		"""
 		print("Open taskmgr.exe to make sure I'm not leaking memory right now.")
-		for i in xrange(100000):
+		for i in range(100000):
 			getDisplayRects()
 
 
